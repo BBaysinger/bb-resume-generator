@@ -81,7 +81,7 @@ Delivered specialized front-end solutions for startups and enterprise clients, f
 
 Created interactive SPAs and promotional websites for Nintendo, Nickelodeon, and Comics Kingdom, delivering high-quality, visually engaging, and performance-optimized experiences across devices.
 
-- Built interactive SPAs and promotional microsites for major entertainment brands, using HTML5, CSS3/SCSS, JavaScript, SolidJS-inspired component patterns, and custom animation systems to deliver polished experiences for desktop and mobile.  
+- Built interactive SPAs and promotional microsites for major entertainment brands, using HTML5, CSS3/SCSS, JavaScript, and custom animation systems to deliver polished experiences for desktop and mobile.  
 - Crafted pixel-perfect UI that mirrored in-game design language (HUDs, achievement screens, animated states), including responsive typography, fluid breakpoints, and mobile-first touch affordances.  
 - Collaborated with back-end developers to integrate APIs, data feeds, uploads, and image processing into front-end interfaces, ensuring smooth communication between creative assets and dynamic content.  
 - Worked closely with designers, animators, and QA teams to translate creative concepts into accessible, production-ready front-end implementations and ran peer code reviews emphasizing security/accessibility gates.  

@@ -1,9 +1,15 @@
+:root {
+  --body-font: "Inter", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --heading-color: #87ad26;
+  --body-color: #111111;
+}
+
 body {
-  font-family: "Inter", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--body-font);
   font-size: 11pt;
   line-height: 1.35;
   margin: 0.75in;
-  color: #111;
+  color: var(--body-color);
 }
 
 h1,
@@ -13,6 +19,7 @@ h4 {
   font-weight: 600;
   line-height: 1.2;
   margin: 0;
+  color: var(--heading-color);
 }
 
 h1 {
@@ -24,14 +31,12 @@ h2 {
   font-size: 15pt;
   margin-top: 20pt;
   margin-bottom: 6pt;
-  color: #87ad26;
 }
 
 h3 {
   font-size: 12pt;
   margin-top: 12pt;
   margin-bottom: 4pt;
-  color: #87ad26;
 }
 
 p {

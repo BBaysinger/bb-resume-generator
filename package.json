@@ -1,9 +1,0 @@
-{
-  "name": "resume-export",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "export:pdf": "pandoc --pdf-engine=weasyprint --css pdf-print.css \"2025-12-01 - Microsoft - Web Developer UI - Remote.md\" -o \"Bradley_Baysinger_Microsoft_UI.pdf\"",
-    "export:docx": "pandoc --reference-doc docx-reference.docx \"2025-12-01 - Microsoft - Web Developer UI - Remote.md\" -o \"Bradley_Baysinger_Microsoft_UI.docx\""
-  }
-}

@@ -1,0 +1,65 @@
+body {
+  font-family: "Inter", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11pt;
+  line-height: 1.35;
+  margin: 0.75in;
+  color: #111;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 {
+  font-size: 22pt;
+  margin-bottom: 8pt;
+}
+
+h2 {
+  font-size: 15pt;
+  margin-top: 20pt;
+  margin-bottom: 6pt;
+  color: #87ad26;
+}
+
+h3 {
+  font-size: 12pt;
+  margin-top: 12pt;
+  margin-bottom: 4pt;
+  color: #87ad26;
+}
+
+p {
+  margin: 4pt 0;
+}
+
+ul {
+  margin: 2pt 0;
+  padding-left: 0;
+  list-style-position: inside;
+}
+
+ul li {
+  margin: 0;
+  padding-left: 0;
+}
+
+a {
+  color: #87ad26;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 12pt 0;
+}

@@ -16,13 +16,19 @@ h1 { font-size: 20pt; margin-bottom: 8pt; }
 h2 { font-size: 14pt; margin-top: 18pt; margin-bottom: 6pt; }
 h3 { font-size: 12pt; margin-top: 12pt; margin-bottom: 4pt; }
 
-p,
-ul {
+p {
   margin: 4pt 0;
 }
 
 ul {
-  padding-left: 16pt;
+  margin: 2pt 0;
+  padding-left: 0;
+  list-style-position: inside;
+}
+
+ul li {
+  margin: 0;
+  padding-left: 0;
 }
 
 hr {

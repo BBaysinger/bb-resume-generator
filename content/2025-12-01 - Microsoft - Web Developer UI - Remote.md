@@ -4,7 +4,7 @@ Front-End / Interactive UI Developer
 **Email:** bbaysinger@gmx.com  
 **LinkedIn:** linkedin.com/in/bbaysinger  
 **GitHub:** github.com/bbaysinger  
-**Location:** Spokane, Washington  
+**Location:** Spokane Washington  
 **Phone:** 509-279-8603  
 
 ---
@@ -22,6 +22,8 @@ Front-end engineer with 15+ years crafting responsive, high-performance web expe
 - **Tooling & Platforms:** Node.js, npm, VS Code, Git, GitHub Actions, Docker, Payload CMS 
 - **Design Systems & UX:** Figma-to-code workflows, WCAG 2.1 AA accessibility, responsive layouts, animation pipelines (GSAP, custom tween engines), CSS architecture  
 - **Data Integration & Observability:** REST/GraphQL APIs, Elasticsearch, performance profiling, custom telemetry hooks (Segment, GA4, bespoke logging)  
+
+---
 
 ## ROLE-READY HIGHLIGHTS
 
@@ -62,8 +64,6 @@ Developed interactive websites for Fortune 500 clients in finance and healthcare
 - Integrated OneTrust consent-management and data-privacy workflows with MuleSoft and Veeva, streamlining compliance (GDPR/CCPA) and improving user trust through responsive preference-center interfaces.  
 - Instrumented experience rollouts with analytics tracking plans, segmentation hooks, and performance profiling sessions to prioritize optimization work with engineering/production leads.
 
----
-
 ### Independent Contractor – Front-End / Interactive Web Developer  
 *2020 – 2021*  
 
@@ -73,8 +73,6 @@ Delivered specialized front-end solutions for startups and enterprise clients, f
 - Built a law-enforcement incident-tracking system integrating GraphQL and Elasticsearch, enabling fast search, filtering, and data visualization within a responsive Angular interface with role-based routing and route guards.  
 - Created animated, interaction-driven systems and microsites for brands including Novo Nordisk and Committee for Children, enhancing engagement through motion design, Canvas/SVG layers, and scalable component frameworks.  
 - Partnered with creative directors and product stakeholders to scope MVPs, plan Sprint/kanban boards in Jira/Trello, and report progress with burn-up charts and demo-ready builds.
-
----
 
 ### Seven2 Interactive – Front-End / Interactive Web Developer  
 *2005 – 2016, 2018 – 2019*  
@@ -87,8 +85,6 @@ Created interactive SPAs and promotional websites for Nintendo, Nickelodeon, and
 - Worked closely with designers, animators, and QA teams to translate creative concepts into accessible, production-ready front-end implementations and ran peer code reviews emphasizing security/accessibility gates.  
 - Engineered flexible Flash (ActionScript 3) frameworks for teams of developers and animators, standardizing workflows and enabling rapid, large-scale campaign delivery while instrumenting custom analytics events for interactive features.
 
----
-
 ### ChalkLabs – UI Developer  
 *2017 – 2018*  
  
@@ -97,8 +93,6 @@ Created interactive SPAs and promotional websites for Nintendo, Nickelodeon, and
 - Built thematic styling hooks and accessibility patterns ensuring WCAG-compliant keyboard focus, high-contrast modes, and screen-reader semantics across mission-critical widgets.  
 - Profiled UI rendering, eliminated hot-path bottlenecks, and documented performance budgets to maintain responsive experiences under massive data loads.  
 - Coordinated release planning via Smartsheet Kanban boards, handling estimation, status communication, and cross-team dependency tracking.
-
----
 
 ## EDUCATION
 

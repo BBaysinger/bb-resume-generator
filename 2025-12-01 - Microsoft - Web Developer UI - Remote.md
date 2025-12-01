@@ -10,7 +10,7 @@ Front-End / Interactive UI Developer
 
 ## SUMMARY
 
-Front-end engineer with 15+ years crafting responsive, high-performance web experiences for Fortune 500 brands, game publishers, and startups. Deep expertise in **CSS/SCSS (10+ yrs), TypeScript (4 yrs), and SolidJS-inspired signal-based patterns** alongside React, Angular, and custom animation engines. Recent work centers on web game-style UI, pixel-precise implementation from Figma, and telemetered, production-ready component systems deployed via modern tooling (Node.js, npm, Vite, GitHub Actions, AWS). Known for blending creative direction with disciplined engineering to ship accessible, maintainable, and instrumented UI.
+Front-end engineer with 15+ years crafting responsive, high-performance web experiences for Fortune 500 brands, game publishers, and startups. Deep expertise in **CSS/SCSS (10+ yrs), TypeScript (4 yrs), React (2 yrs), Angular (2 yrs)**, and custom animation engines. Recent work centers on web game-style UI, pixel-precise implementation from Figma, and telemetered, production-ready component systems deployed via modern tooling (Node.js, npm, Vite, GitHub Actions, AWS). Known for blending creative direction with disciplined engineering to ship accessible, maintainable, and instrumented UI.
 
 ---
 
@@ -39,8 +39,7 @@ Front-end engineer with 15+ years crafting responsive, high-performance web expe
 Spent a full year in focused independent study, designing and building a production-grade portfolio platform as a testbed for **gaming-style UI**, real-time reactive interfaces, and high-performance motion systems.
 
 - Architected and implemented a full-stack interactive portfolio using React, TypeScript, Next.js, Payload CMS, Docker, Terraform, GitHub Actions, and AWS (including S3-backed media and environment-specific deployments).  
-- Built game-like UI systems: parallax project carousel with swipe navigation, an animated grid with simulated depth (“Fluxel”), a physics-driven kinetic orb, sprite-sheet rendering pipelines, and HUD-style panels with layered motion and stateful transitions.  
-- Prototyped SolidJS signal-based micro-interactions (2022–present) to benchmark fine-grained reactivity, then ported learnings into React motion controllers for deterministically smooth animation timing.  
+- Built game-like UI systems: parallax project carousel with swipe navigation, an animated grid with simulated depth (“Fluxel”), a physics-driven kinetic orb, sprite-sheet rendering pipelines, and HUD-style panels with layered motion and stateful transitions.   
 - Engineered a CMS-backed content model for projects and case studies: dynamic routing/slug generation, NDA-aware content gating, responsive image pipelines, and SSR/SSG configurations tuned for performance.  
 - Implemented production-grade tooling and DX: strict TypeScript type safety across frontend and backend, unified linting/formatting, reusable component systems, and automated CI/CD workflows for repeatable deployments.  
 - Instrumented UI performance/engagement with custom FPS counters, Segment + GA4 funnels, and build-time Core Web Vitals budgets to guide polish work.  

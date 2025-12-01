@@ -94,6 +94,8 @@ Created interactive SPAs and promotional websites for Nintendo, Nickelodeon, and
 - Profiled UI rendering, eliminated hot-path bottlenecks, and documented performance budgets to maintain responsive experiences under massive data loads.  
 - Coordinated release planning via Smartsheet Kanban boards, handling estimation, status communication, and cross-team dependency tracking.
 
+---
+
 ## EDUCATION
 
 **Spokane Falls Community College — Spokane, WA**  
@@ -104,6 +106,8 @@ Created interactive SPAs and promotional websites for Nintendo, Nickelodeon, and
 - Self-taught graphics, vanilla JavaScript, Dynamic HTML, and PHP while working full-time in a non-technical role.  
 - Built early browser-based UI experiments and mini-games (custom chrome/navigation, slot-machine game), handling cross-browser compatibility before formal schooling.
 
+---
+
 ## SELECT INTERACTIVE & WEB GAME PROJECTS DELIVERED
 
 - **Web game experiences for major brands** – Designed and implemented browser-based games and game-like experiences (puzzles, platformers, shooters, tactical-movement games, edutainment, and skill games) for properties including Nintendo, Nickelodeon, and other entertainment clients. Focus on responsive layout, animation, and performance on low-power devices.  
@@ -111,4 +115,4 @@ Created interactive SPAs and promotional websites for Nintendo, Nickelodeon, and
 - **Interactive marketing & launch experiences** – Delivered interactive microsites, movie/TV tie-ins, sweepstakes flows, site-release reveals, quizzes, and multi-step forms with polished motion design, Figma-to-code fidelity, and pixel-precise branding.  
 - **Canvas & custom animation systems** – Created HTML5/Canvas and JavaScript-based animation systems (including custom tweening, sprite-sheet players, and timeline/media sequencers) to support web games, interactive ads, and rich UI transitions beyond standard CSS capabilities.  
 - **Data / utility / product UIs** – Implemented interactive dashboards, calculators, product demos, data-driven UIs, and app-style interfaces with responsive layouts, REST/JSON integration, and attention to performance and error handling.  
-- **Portfolio & R&D platforms** – Built multiple generations of interactive portfolios, culminating in the current bb-portfolio project: a production-grade, CMS-backed, game-inspired UI platform used as a testbed for real-time animation, performance tuning, and modern web game development concepts.
+- **Portfolio & R&D platforms** – Built multiple generations of interactive portfolios, culminating in the current bb-portfolio project: a production-grade, CMS-backed, game-inspired UI platform used as a testbed for real-time animation, performance tuning, and modern web game development concepts. (releasing soon)

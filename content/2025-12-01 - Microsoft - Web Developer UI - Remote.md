@@ -3,8 +3,8 @@ Front-End / Interactive UI Developer
 
 **Email:** bbaysinger@gmx.com  
 **LinkedIn:** linkedin.com/in/bbaysinger  
-**GitHub:** github.com/bbaysinger
-**Location:** Spokane, Washington
+**GitHub:** github.com/bbaysinger  
+**Location:** Spokane, Washington  
 **Phone:** 509-279-8603  
 
 ---
@@ -25,7 +25,7 @@ Front-end engineer with 15+ years crafting responsive, high-performance web expe
 
 ## ROLE-READY HIGHLIGHTS
 
-- Translating pixel-locked Figma specs into production-ready UI, including interaction states, focus management, and device-specific polish across marketing, SaaS, and game-adjacent projects.
+- Translating pixel-locked Figma specs into production-ready UI, including interaction states, focus management, and device-specific polish across marketing, and game-adjacent projects.
 - Used signal patterns to inform React and Canvas interaction prototypes, applying fine-grained reactivity concepts to keep game-like UI states predictable and smooth.
 - Extending and governing design systems: theming tokens, Storybook-like playgrounds, and CMS-backed component inventories for fast iteration.
 - Instrumenting UI for telemetry and performance (Core Web Vitals monitors, custom FPS counters, Segments/GA funnels) to guide optimization work.

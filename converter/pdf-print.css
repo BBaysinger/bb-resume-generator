@@ -1,8 +1,18 @@
+@page {
+  size: letter;
+  margin: 0.35in 0.5in;
+}
+
+html {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 body {
   font-family: "Inter", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
   font-size: 11pt;
   line-height: 1.35;
-  margin: 0.6in 0.5in;
+  margin: 0 !important;
   color: #111;
 }
 

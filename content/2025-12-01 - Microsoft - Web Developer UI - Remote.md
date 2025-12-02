@@ -15,6 +15,14 @@ Front-end engineer with 15+ years crafting responsive, high-performance web expe
 
 ---
 
+## SELECTED ACHIEVEMENTS
+
+- 2008 Webby People’s Choice Award (Art Website of the Year) for interactive work on Artocracy.org.
+- Stack Overflow ~6.9k reputation with 14 gold badges recognizing front-end/domain expertise.
+- Contributed to 13+ Spokane Ad Fed (ADDY) wins ranging from Silver to Best of Show for interactive campaigns.
+
+---
+
 ## CORE SKILLS
 
 - **Languages & Markup:** TypeScript (4 yrs), ES6+, HTML5, CSS3/SCSS (10 yrs), JSX/TSX, JSON  
@@ -22,6 +30,7 @@ Front-end engineer with 15+ years crafting responsive, high-performance web expe
 - **Tooling & Platforms:** Node.js, npm, VS Code, Git, GitHub Actions, Docker, Payload CMS 
 - **Design Systems & UX:** Figma-to-code workflows, WCAG 2.1 AA accessibility, responsive layouts, animation pipelines (GSAP, custom tween engines), CSS architecture  
 - **Data Integration & Observability:** REST/GraphQL APIs, Elasticsearch, performance profiling, custom telemetry hooks (Segment, GA4, bespoke logging)  
+- **Brands delivered for:** Nintendo, Nickelodeon, AT&T, Exact Sciences, Novo Nordisk, Committee for Children, Golden 1 Credit Union.
 
 ---
 

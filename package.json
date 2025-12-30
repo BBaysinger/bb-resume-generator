@@ -2,10 +2,26 @@
   "name": "resume-export",
   "version": "1.0.0",
   "private": true,
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": [
+          "*.mjs"
+        ],
+        "options": {
+          "parser": "babel"
+        }
+      }
+    ]
+  },
   "scripts": {
-    "build:html": "mkdir -p output && pandoc --standalone --embed-resources --css converter/resume.css 'content/2025-12-01 - Microsoft - Web Developer UI - Remote.md' -o output/Bradley_Baysinger_Microsoft_UI.html",
-    "export:html": "npm run build:html && pandoc output/Bradley_Baysinger_Microsoft_UI.html -o output/Bradley_Baysinger_Microsoft_UI.docx && .venv/bin/python converter/scripts/normalize_docx_lists.py output/Bradley_Baysinger_Microsoft_UI.docx",
-    "export:pdf": "npm run build:html && .venv/bin/weasyprint output/Bradley_Baysinger_Microsoft_UI.html output/Bradley_Baysinger_Microsoft_UI.pdf --stylesheet converter/pdf-print.css",
-    "export:docx": "npm run export:html"
+    "build:html": "node scripts/resume.mjs build-html",
+    "export:pdf": "node scripts/resume.mjs export-pdf",
+    "export:docx": "node scripts/resume.mjs export-docx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   }
 }

@@ -1,0 +1,196 @@
+#!/usr/bin/env node
+
+import { spawnSync } from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
+
+function fail(message) {
+  console.error(message);
+  process.exit(1);
+}
+
+function parseArgs(argv) {
+  const args = { _: [] };
+
+  for (let i = 0; i < argv.length; i += 1) {
+    const token = argv[i];
+
+    if (token.startsWith("--")) {
+      const [rawKey, rawValue] = token.split("=", 2);
+      const key = rawKey.slice(2);
+
+      if (rawValue !== undefined) {
+        args[key] = rawValue;
+        continue;
+      }
+
+      const next = argv[i + 1];
+      if (next && !next.startsWith("--")) {
+        args[key] = next;
+        i += 1;
+      } else {
+        args[key] = true;
+      }
+
+      continue;
+    }
+
+    args._.push(token);
+  }
+
+  return args;
+}
+
+function sanitizeBasename(name) {
+  return name
+    .trim()
+    .replace(/\s+/g, "_")
+    .replace(/[^A-Za-z0-9._-]/g, "")
+    .replace(/_+/g, "_");
+}
+
+function resolveDefaultOutputs({ input, outputDir }) {
+  const inputBase = path.basename(input, path.extname(input));
+  const safeBase = sanitizeBasename(inputBase);
+
+  const html = path.join(outputDir, `${safeBase}.html`);
+  const pdf = path.join(outputDir, `${safeBase}.pdf`);
+  const docx = path.join(outputDir, `${safeBase}.docx`);
+
+  return { html, pdf, docx };
+}
+
+function run(command, commandArgs, { cwd } = {}) {
+  const result = spawnSync(command, commandArgs, {
+    cwd,
+    stdio: "inherit",
+  });
+
+  if (result.error) {
+    fail(`Failed running ${command}: ${result.error.message}`);
+  }
+
+  if (result.status !== 0) {
+    process.exit(result.status ?? 1);
+  }
+}
+
+function fileExists(filePath) {
+  try {
+    fs.accessSync(filePath, fs.constants.F_OK);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function getVenvPython() {
+  const venvPython = path.join(process.cwd(), ".venv", "bin", "python");
+  return fileExists(venvPython) ? venvPython : "python3";
+}
+
+function ensureDir(dir) {
+  fs.mkdirSync(dir, { recursive: true });
+}
+
+function usage() {
+  const cmd = path.basename(process.argv[1]);
+  console.log(`Usage:
+  ${cmd} build-html   --input <markdown> [--output <html>] [--css <css>]
+  ${cmd} export-pdf   --input <markdown> [--pdf <pdf>] [--html <html>] [--css <css>] [--printCss <css>]
+  ${cmd} export-docx  --input <markdown> [--docx <docx>] [--html <html>] [--css <css>]
+
+Examples:
+  npm run build:html -- --input "content/2025-12-29 - Sunrise Systems.md"
+  npm run export:pdf -- --input "content/2025-12-29 - Sunrise Systems.md"
+  npm run export:docx -- --input "content/2025-12-29 - Sunrise Systems.md"
+`);
+}
+
+const [, , command, ...rest] = process.argv;
+const args = parseArgs(rest);
+
+if (!command || args.help) {
+  usage();
+  process.exit(command ? 0 : 1);
+}
+
+const cwd = process.cwd();
+const input = args.input ?? args.in ?? args._[0];
+if (!input) {
+  usage();
+  fail("Missing --input <markdown>");
+}
+
+const outputDir = args.outputDir ?? path.join(cwd, "output");
+ensureDir(outputDir);
+
+const defaults = resolveDefaultOutputs({ input, outputDir });
+
+const css = args.css ?? path.join(cwd, "converter", "resume.css");
+const printCss = args.printCss ?? path.join(cwd, "converter", "pdf-print.css");
+
+const html = args.output ?? args.html ?? defaults.html;
+const pdf = args.pdf ?? defaults.pdf;
+const docx = args.docx ?? defaults.docx;
+
+if (command === "build-html") {
+  run("pandoc", [
+    "--standalone",
+    "--embed-resources",
+    "--css",
+    css,
+    input,
+    "-o",
+    html,
+  ]);
+  process.exit(0);
+}
+
+if (command === "export-pdf") {
+  run(process.execPath, [
+    process.argv[1],
+    "build-html",
+    "--input",
+    input,
+    "--html",
+    html,
+    "--css",
+    css,
+  ]);
+
+  const python = getVenvPython();
+  run(python, ["-m", "weasyprint", html, pdf, "--stylesheet", printCss]);
+  process.exit(0);
+}
+
+if (command === "export-docx") {
+  run(process.execPath, [
+    process.argv[1],
+    "build-html",
+    "--input",
+    input,
+    "--html",
+    html,
+    "--css",
+    css,
+  ]);
+
+  run("pandoc", [html, "-o", docx]);
+
+  const python = getVenvPython();
+  const normalizer = path.join(
+    cwd,
+    "converter",
+    "scripts",
+    "normalize_docx_lists.py",
+  );
+  if (fileExists(normalizer)) {
+    run(python, [normalizer, docx]);
+  }
+
+  process.exit(0);
+}
+
+usage();
+fail(`Unknown command: ${command}`);

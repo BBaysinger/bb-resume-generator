@@ -1,20 +1,23 @@
 {
-    "cSpell.words": [
-        "ADDY",
-        "affordances",
-        "Artocracy",
-        "CCPA",
-        "Fluxel",
-        "microsites",
-        "Nordisk",
-        "pandoc",
-        "platformers",
-        "Pushgraph",
-        "rollouts",
-        "smallcaps",
-        "telemetered",
-        "Veeva",
-        "WCAG",
-        "zout"
-    ]
+  "cSpell.words": [
+    "ADDY",
+    "affordances",
+    "Artocracy",
+    "CCPA",
+    "Fluxel",
+    "microsites",
+    "Nordisk",
+    "pandoc",
+    "platformers",
+    "Pushgraph",
+    "rollouts",
+    "smallcaps",
+    "stylesheet",
+    "telemetered",
+    "Veeva",
+    "venv",
+    "WCAG",
+    "weasyprint",
+    "zout"
+  ]
 }

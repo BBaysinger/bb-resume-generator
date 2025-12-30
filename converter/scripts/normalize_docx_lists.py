@@ -75,9 +75,11 @@ def normalize_lists(docx_path: str | os.PathLike[str]) -> bool:
 
 
 def main() -> int:
-    root = Path(__file__).resolve().parents[1]
-    default_doc = root / "output" / "Bradley_Baysinger_Microsoft_UI.docx"
-    path = Path(sys.argv[1]) if len(sys.argv) > 1 else default_doc
+    if len(sys.argv) < 2:
+        print("Usage: normalize_docx_lists.py <path-to.docx>", file=sys.stderr)
+        return 2
+
+    path = Path(sys.argv[1])
     if not path.exists():
         print(f"DOCX not found: {path}", file=sys.stderr)
         return 1

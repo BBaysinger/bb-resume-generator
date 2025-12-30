@@ -101,9 +101,9 @@ function usage() {
   ${cmd} export-docx  --input <markdown> [--docx <docx>] [--html <html>] [--css <css>]
 
 Examples:
-  npm run build:html -- --input "content/2025-12-29 - Sunrise Systems.md"
-  npm run export:pdf -- --input "content/2025-12-29 - Sunrise Systems.md"
-  npm run export:docx -- --input "content/2025-12-29 - Sunrise Systems.md"
+  npm run build:html -- --input "input/resume.md"
+  npm run export:pdf -- --input "input/resume.md"
+  npm run export:docx -- --input "input/resume.md"
 `);
 }
 

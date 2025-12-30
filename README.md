@@ -25,15 +25,15 @@ If Pandoc or WeasyPrint are installed via Homebrew, make sure their binaries are
 
 ## Usage
 
-1. Create/update a Markdown resume inside `content/`.
+1. Create/update a Markdown resume inside `input/`.
 2. Run one of the npm scripts, passing the Markdown file path:
-   - `npm run build:html -- --input "content/2025-12-01 - Microsoft - Web Developer UI - Remote.md"`
-   - `npm run export:docx -- --input "content/2025-12-01 - Microsoft - Web Developer UI - Remote.md"`
-   - `npm run export:pdf -- --input "content/2025-12-01 - Microsoft - Web Developer UI - Remote.md"`
+   - `npm run build:html -- --input "input/resume.md"`
+   - `npm run export:docx -- --input "input/resume.md"`
+   - `npm run export:pdf -- --input "input/resume.md"`
 
 Outputs land in `output/`. By default the output filename is derived from the Markdown filename (spaces become underscores). You can override output paths with `--html`, `--pdf`, or `--docx`.
 
-### Convert everything in `content/`
+### Convert everything in `input/`
 
 - `npm run convert:all`
 
@@ -44,7 +44,7 @@ Optional flags:
 
 ## Repo structure
 
-- `content/` – source Markdown resumes.
+- `input/` – source Markdown resumes.
 - `converter/resume.css` – on-screen styling for the HTML export.
 - `converter/pdf-print.css` – print-specific overrides for WeasyPrint.
 - `converter/scripts/normalize_docx_lists.py` – fixes Word bullet indentation.

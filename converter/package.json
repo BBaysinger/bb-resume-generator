@@ -1,10 +1,5 @@
 {
   "name": "resume-export",
   "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "export:html": "pandoc --standalone --css resume.css '../content/2025-12-01 - Microsoft - Web Developer UI - Remote.md' -o build/Bradley_Baysinger_Microsoft_UI.html",
-    "export:pdf": "npm run export:html && mkdir -p ../output && weasyprint build/Bradley_Baysinger_Microsoft_UI.html ../output/Bradley_Baysinger_Microsoft_UI.pdf --stylesheet pdf-print.css",
-    "export:docx": "npm run export:html && mkdir -p ../output && pandoc build/Bradley_Baysinger_Microsoft_UI.html --reference-doc docx-reference.docx -o ../output/Bradley_Baysinger_Microsoft_UI.docx && python3 scripts/normalize_docx_lists.py ../output/Bradley_Baysinger_Microsoft_UI.docx"
-  }
+  "private": true
 }

@@ -47,14 +47,14 @@ function usage() {
   ${cmd} [--contentDir <dir>] [--outputDir <dir>] [--formats <csv>] [--continueOnError]
 
 Defaults:
-  --contentDir content
+  --contentDir input
   --outputDir  output
   --formats    pdf,docx,html
 
 Examples:
   npm run convert:all
   node scripts/convert-all.mjs --formats pdf
-  node scripts/convert-all.mjs --contentDir content --outputDir output
+  node scripts/convert-all.mjs --contentDir input --outputDir output
 `);
 }
 
@@ -109,7 +109,7 @@ if (args.help) {
 }
 
 const repoRoot = process.cwd();
-const contentDir = path.resolve(repoRoot, String(args.contentDir ?? "content"));
+const contentDir = path.resolve(repoRoot, String(args.contentDir ?? "input"));
 const outputDir = path.resolve(repoRoot, String(args.outputDir ?? "output"));
 const formats = String(args.formats ?? "pdf,docx,html")
   .split(",")
@@ -119,7 +119,7 @@ const formats = String(args.formats ?? "pdf,docx,html")
 const continueOnError = Boolean(args.continueOnError);
 
 if (!fs.existsSync(contentDir)) {
-  fail(`Content directory not found: ${contentDir}`);
+  fail(`Input directory not found: ${contentDir}`);
 }
 
 ensureDir(outputDir);

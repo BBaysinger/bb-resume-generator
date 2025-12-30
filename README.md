@@ -33,6 +33,15 @@ If Pandoc or WeasyPrint are installed via Homebrew, make sure their binaries are
 
 Outputs land in `output/`. By default the output filename is derived from the Markdown filename (spaces become underscores). You can override output paths with `--html`, `--pdf`, or `--docx`.
 
+### Convert everything in `content/`
+
+- `npm run convert:all`
+
+Optional flags:
+
+- `npm run convert:all -- --formats pdf,docx,html`
+- `npm run convert:all -- --continueOnError`
+
 ## Repo structure
 
 - `content/` – source Markdown resumes.

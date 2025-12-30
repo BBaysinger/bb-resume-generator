@@ -19,6 +19,7 @@
   },
   "scripts": {
     "build:html": "node scripts/resume.mjs build-html",
+    "convert:all": "node scripts/convert-all.mjs",
     "export:pdf": "node scripts/resume.mjs export-pdf",
     "export:docx": "node scripts/resume.mjs export-docx",
     "format": "prettier --write .",

@@ -46,11 +46,28 @@ p {
 
 ul {
   margin: 2pt 0;
-  padding-left: 1.25em;
-  list-style-position: outside;
+  padding-left: 0;
+  list-style: none;
 }
 
 ul li {
+  margin: 0;
+  padding-left: 7.5em;
+  position: relative;
+}
+
+ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+
+ol {
+  margin: 2pt 0;
+  padding-left: 1.25em;
+}
+
+ol li {
   margin: 0;
   padding-left: 0;
 }

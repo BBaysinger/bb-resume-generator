@@ -26,6 +26,8 @@
     "virtualenv",
     "WCAG",
     "weasyprint",
+    "yourdomain",
+    "yourhandle",
     "zout"
   ]
 }

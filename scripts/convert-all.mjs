@@ -76,6 +76,10 @@ function listMarkdownFiles(dir) {
       continue;
     }
 
+    if (entry.isFile() && entry.name.startsWith("_")) {
+      continue;
+    }
+
     if (entry.isFile() && entry.name.toLowerCase().endsWith(".md")) {
       files.push(fullPath);
     }

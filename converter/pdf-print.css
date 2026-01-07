@@ -88,6 +88,19 @@ hr {
   margin: 12pt 0;
 }
 
+.signature-name {
+  font-size: 11pt;
+  font-weight: 600;
+}
+
+.signature-name .name-first {
+  color: #87ad26;
+}
+
+.signature-name .name-last {
+  color: #999;
+}
+
 strong {
   color: #0a0a0a;
 }

@@ -11,6 +11,7 @@
     "Artocracy",
     "CCPA",
     "Fluxel",
+    "lxml",
     "microsites",
     "Nordisk",
     "pandoc",
@@ -22,6 +23,7 @@
     "telemetered",
     "Veeva",
     "venv",
+    "virtualenv",
     "WCAG",
     "weasyprint",
     "zout"

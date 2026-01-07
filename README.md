@@ -45,6 +45,7 @@ Optional flags:
 ## Repo structure
 
 - `input/` – source Markdown resumes.
+- `templates/` – starter Markdown templates (not auto-converted).
 - `converter/resume.css` – on-screen styling for the HTML export.
 - `converter/pdf-print.css` – print-specific overrides for WeasyPrint.
 - `converter/scripts/normalize_docx_lists.py` – fixes Word bullet indentation.

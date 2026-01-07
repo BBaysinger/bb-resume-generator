@@ -27,6 +27,14 @@ h1 {
   margin-bottom: 8pt;
 }
 
+h1 .name-first {
+  color: #999;
+}
+
+h1 .name-last {
+  color: var(--heading-color);
+}
+
 h2 {
   font-size: 12pt;
   margin-top: 6pt;

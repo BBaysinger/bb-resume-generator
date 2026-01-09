@@ -50,3 +50,17 @@ Optional flags:
 - `converter/pdf-print.css` – print-specific overrides for WeasyPrint.
 - `converter/scripts/normalize_docx_lists.py` – fixes Word bullet indentation.
 - `output/` – generated artifacts; safe to delete/regenerate.
+
+## Preventing “invisible” diff noise in `input/`
+
+Copy/paste from Word / Google Docs can introduce invisible or lookalike Unicode characters (notably the non-breaking hyphen `U+2011`) that render like a normal `-` but cause noisy diffs in version control.
+
+This project includes a normalizer plus an optional pre-commit hook in the nested `input/` git repo:
+
+- Manual normalization:
+  - `npm run normalize:md` (writes fixes into `input/`)
+  - `npm run normalize:md:check` (fails if fixes would be applied)
+- One-time hook setup (recommended if you commit inside `input/`):
+  - `npm run setup:input-hooks`
+
+The hook auto-normalizes staged `*.md` files before commit and re-stages them.

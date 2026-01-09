@@ -129,7 +129,8 @@ const defaults = resolveDefaultOutputs({ input, outputDir });
 
 const css = args.css ?? path.join(cwd, "converter", "resume.css");
 const printCss = args.printCss ?? path.join(cwd, "converter", "pdf-print.css");
-const template = args.template ?? path.join(cwd, "converter", "pandoc-template.html");
+const template =
+  args.template ?? path.join(cwd, "converter", "pandoc-template.html");
 
 const html = args.output ?? args.html ?? defaults.html;
 const pdf = args.pdf ?? defaults.pdf;

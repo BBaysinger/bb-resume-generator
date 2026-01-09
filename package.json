@@ -22,7 +22,12 @@
     "convert:all": "node scripts/convert-all.mjs",
     "export:pdf": "node scripts/resume.mjs export-pdf",
     "export:docx": "node scripts/resume.mjs export-docx",
+    "normalize:md": "python3 input/_scripts/normalize_markdown_unicode.py --write input",
+    "normalize:md:check": "python3 input/_scripts/normalize_markdown_unicode.py --check input",
+    "setup:input-hooks": "cd input && ./_scripts/setup-hooks.sh",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "format:md": "prettier --config .prettierrc.json --write \"input/**/*.md\"",
+    "format:md:check": "prettier --config .prettierrc.json --check \"input/**/*.md\""
   }
 }

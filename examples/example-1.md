@@ -1,4 +1,5 @@
 # <span class="name-first">FIRST</span> <span class="name-last">LAST</span>
+
 ### Target Role / Title
 
 **Location:** City, ST (Remote/Onsite/Hybrid)  
@@ -7,7 +8,7 @@
 **LinkedIn:** [linkedin.com/in/yourhandle](https://linkedin.com/in/yourhandle)  
 **Portfolio:** [yourdomain.com](https://yourdomain.com)  
 **GitHub:** [github.com/yourhandle](https://github.com/yourhandle)  
-**Stack Overflow:** [stackoverflow.com/u/0000000](https://stackoverflow.com/u/0000000)  
+**Stack Overflow:** [stackoverflow.com/u/0000000](https://stackoverflow.com/u/0000000)
 
 ---
 
@@ -36,12 +37,15 @@
 ## CORE SKILLS
 
 **Front-End**
+
 - Skills list (keep it aligned with job description keywords).
 
 **Frameworks / Build**
+
 - Frameworks, build tools, test tools.
 
 **Platforms / Tooling**
+
 - CI/CD, cloud, observability, containers.
 
 ---

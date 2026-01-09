@@ -69,6 +69,9 @@ function listMarkdownFiles(dir) {
   for (const entry of entries) {
     if (entry.name.startsWith(".")) continue;
 
+    // Treat underscore-prefixed folders as non-content (e.g., helper scripts)
+    if (entry.isDirectory() && entry.name.startsWith("_")) continue;
+
     const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {

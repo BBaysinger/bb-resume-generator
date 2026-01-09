@@ -1,6 +1,7 @@
 .venv/
 output/
 converter/build/
+input/
 **/*.docx
 **/*.pdf
 .DS_Store

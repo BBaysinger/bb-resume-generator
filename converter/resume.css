@@ -43,7 +43,7 @@ h2 {
 
 h3 {
   font-size: 9.5pt;
-  margin-top: 12pt;
+  margin-top: 8pt;
   margin-bottom: 4pt;
 }
 
@@ -86,6 +86,11 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.credential {
+  color: var(--heading-color);
+  font-weight: 600;
 }
 
 hr {

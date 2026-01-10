@@ -104,3 +104,8 @@ hr {
 strong {
   color: #0a0a0a;
 }
+
+.credential {
+  color: #87ad26;
+  font-weight: 600;
+}

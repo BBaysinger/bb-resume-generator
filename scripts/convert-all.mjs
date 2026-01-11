@@ -3,6 +3,7 @@
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 function fail(message) {
   console.error(message);
@@ -115,7 +116,8 @@ if (args.help) {
   process.exit(0);
 }
 
-const repoRoot = process.cwd();
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(scriptDir, "..");
 const contentDir = path.resolve(repoRoot, String(args.contentDir ?? "input"));
 const outputDir = path.resolve(repoRoot, String(args.outputDir ?? "output"));
 const formats = String(args.formats ?? "pdf,docx,html")

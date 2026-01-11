@@ -3,6 +3,7 @@
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 function fail(message) {
   console.error(message);
@@ -84,8 +85,8 @@ function fileExists(filePath) {
   }
 }
 
-function getVenvPython() {
-  const venvPython = path.join(process.cwd(), ".venv", "bin", "python");
+function getVenvPython(baseDir) {
+  const venvPython = path.join(baseDir, ".venv", "bin", "python");
   return fileExists(venvPython) ? venvPython : "python3";
 }
 
@@ -98,7 +99,7 @@ function usage() {
   console.log(`Usage:
   ${cmd} build-html   --input <markdown> [--output <html>] [--css <css>]
   ${cmd} export-pdf   --input <markdown> [--pdf <pdf>] [--html <html>] [--css <css>] [--printCss <css>]
-  ${cmd} export-docx  --input <markdown> [--docx <docx>] [--html <html>] [--css <css>]
+  ${cmd} export-docx  --input <markdown> [--docx <docx>]
 
 Examples:
   npm run build:html -- --input "input/resume.md"
@@ -115,22 +116,24 @@ if (!command || args.help) {
   process.exit(command ? 0 : 1);
 }
 
-const cwd = process.cwd();
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(scriptDir, "..");
 const input = args.input ?? args.in ?? args._[0];
 if (!input) {
   usage();
   fail("Missing --input <markdown>");
 }
 
-const outputDir = args.outputDir ?? path.join(cwd, "output");
+const outputDir = args.outputDir ?? path.join(repoRoot, "output");
 ensureDir(outputDir);
 
 const defaults = resolveDefaultOutputs({ input, outputDir });
 
-const css = args.css ?? path.join(cwd, "converter", "resume.css");
-const printCss = args.printCss ?? path.join(cwd, "converter", "pdf-print.css");
+const css = args.css ?? path.join(repoRoot, "converter", "resume.css");
+const printCss =
+  args.printCss ?? path.join(repoRoot, "converter", "pdf-print.css");
 const template =
-  args.template ?? path.join(cwd, "converter", "pandoc-template.html");
+  args.template ?? path.join(repoRoot, "converter", "pandoc-template.html");
 
 const html = args.output ?? args.html ?? defaults.html;
 const pdf = args.pdf ?? defaults.pdf;
@@ -163,34 +166,36 @@ if (command === "export-pdf") {
     css,
   ]);
 
-  const python = getVenvPython();
+  const python = getVenvPython(repoRoot);
   run(python, ["-m", "weasyprint", html, pdf, "--stylesheet", printCss]);
   process.exit(0);
 }
 
 if (command === "export-docx") {
-  run(process.execPath, [
-    process.argv[1],
-    "build-html",
-    "--input",
-    input,
-    "--html",
-    html,
-    "--css",
-    css,
-  ]);
+  // Convert directly from Markdown to DOCX. Pandoc does not reliably apply
+  // external CSS during HTML->DOCX conversion, so we normalize DOCX styles
+  // after conversion to approximate the converter CSS.
+  run("pandoc", ["--standalone", input, "-o", docx]);
 
-  run("pandoc", [html, "-o", docx]);
-
-  const python = getVenvPython();
+  const python = getVenvPython(repoRoot);
   const normalizer = path.join(
-    cwd,
+    repoRoot,
     "converter",
     "scripts",
     "normalize_docx_lists.py",
   );
   if (fileExists(normalizer)) {
     run(python, [normalizer, docx]);
+  }
+
+  const styleNormalizer = path.join(
+    repoRoot,
+    "converter",
+    "scripts",
+    "normalize_docx_styles.py",
+  );
+  if (fileExists(styleNormalizer)) {
+    run(python, [styleNormalizer, docx]);
   }
 
   process.exit(0);

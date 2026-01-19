@@ -134,6 +134,9 @@ const printCss =
   args.printCss ?? path.join(repoRoot, "converter", "pdf-print.css");
 const template =
   args.template ?? path.join(repoRoot, "converter", "pandoc-template.html");
+const alignDatesFilter =
+  args.alignDatesFilter ??
+  path.join(repoRoot, "converter", "filters", "align_dates_right.lua");
 
 const html = args.output ?? args.html ?? defaults.html;
 const pdf = args.pdf ?? defaults.pdf;
@@ -145,6 +148,8 @@ if (command === "build-html") {
     "--embed-resources",
     "--template",
     template,
+    "--lua-filter",
+    alignDatesFilter,
     "--css",
     css,
     input,

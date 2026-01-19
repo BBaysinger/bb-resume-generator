@@ -47,6 +47,20 @@ h3 {
   margin-bottom: 4pt;
 }
 
+h3.with-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12pt;
+}
+
+h3.with-date .date-range {
+  color: #87ad26;
+  font-style: italic;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
 p {
   margin: 4pt 0;
 }

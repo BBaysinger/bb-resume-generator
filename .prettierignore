@@ -3,7 +3,6 @@ output/
 converter/build/
 input/**
 !input/**/*.md
-!input/_scripts/**
 **/*.docx
 **/*.pdf
 .DS_Store

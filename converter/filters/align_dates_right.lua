@@ -1,5 +1,5 @@
--- Pandoc Lua filter: move a date-only paragraph immediately following an H3
--- into the H3 itself, wrapped in a span.date-range for right alignment.
+-- Pandoc Lua filter: move a date-only paragraph immediately following an H2/H3
+-- into the header itself, wrapped in a span.date-range for right alignment.
 --
 -- Intended for resume formatting like:
 --   ### Company — Role
@@ -60,7 +60,7 @@ function Pandoc(doc)
   while i <= #blocks do
     local block = blocks[i]
 
-    if block.t == "Header" and block.level == 3 then
+    if block.t == "Header" and (block.level == 2 or block.level == 3) then
       local nextBlock = blocks[i + 1]
 
       if is_date_only_para(nextBlock) then

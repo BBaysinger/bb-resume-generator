@@ -54,11 +54,24 @@ h3.with-date {
   gap: 12pt;
 }
 
+h2.with-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12pt;
+}
+
+h2.with-date .date-range,
 h3.with-date .date-range {
   color: #87ad26;
-  font-style: italic;
   font-weight: 400;
   white-space: nowrap;
+  font-size: 8pt;
+}
+
+h2.with-date .date-range em,
+h3.with-date .date-range em {
+  font-style: normal;
 }
 
 p {

@@ -146,6 +146,9 @@ if (!fs.existsSync(resumeScript)) {
 const wantsPdf = formats.includes("pdf");
 const wantsDocx = formats.includes("docx");
 const wantsHtml = formats.includes("html");
+// Note: PDF export always generates an intermediate HTML file (via resume.mjs),
+// so we only need to explicitly build HTML when PDF is not requested.
+const shouldBuildHtml = wantsHtml && !wantsPdf;
 
 let failures = 0;
 
@@ -174,7 +177,9 @@ for (const filePath of mdFiles) {
       ]);
     }
 
-    if (wantsHtml && !wantsPdf && !wantsDocx) {
+    // If the user asked for HTML (and not PDF), generate it explicitly.
+    // DOCX export does not produce HTML, and PDF export already generates HTML.
+    if (shouldBuildHtml) {
       runNode(resumeScript, [
         "build-html",
         "--input",

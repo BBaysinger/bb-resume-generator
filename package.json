@@ -20,6 +20,7 @@
   "scripts": {
     "build:html": "node scripts/resume.mjs build-html",
     "convert:all": "node scripts/convert-all.mjs",
+    "draft:email": "node scripts/draft-email.mjs",
     "export:pdf": "node scripts/resume.mjs export-pdf",
     "export:docx": "node scripts/resume.mjs export-docx",
     "normalize:md": "python3 scripts/input/_scripts/normalize_markdown_unicode.py --write input",

@@ -1,66 +1,238 @@
-# BB Resume Generator
+# Resume Generator
 
-Static tooling to turn a Markdown resume into HTML, DOCX, and PDF deliverables. Pandoc handles Markdown -> HTML/DOCX, WeasyPrint exports the PDF, and a small Python script normalizes DOCX bullet indentation for consistent spacing.
+Static tooling to turn a Markdown resume (and cover letter) into polished HTML, PDF, and DOCX deliverables.
+
+At a glance:
+
+- Markdown → HTML via Pandoc, using a repo template + CSS.
+- HTML → PDF via WeasyPrint (print CSS controls the PDF look).
+- Markdown → DOCX via Pandoc (experimental), then post-processed so Word formatting is more consistent.
+
+## How it works
+
+- **HTML export**: Pandoc converts Markdown to standalone HTML using [converter/pandoc-template.html](converter/pandoc-template.html), applies [converter/resume.css](converter/resume.css), and runs a small Lua filter to tweak formatting (see [converter/filters/align_dates_right.lua](converter/filters/align_dates_right.lua)).
+- **PDF export**: The PDF pipeline first generates HTML (same as above), then runs `python -m weasyprint` with [converter/pdf-print.css](converter/pdf-print.css).
+- **DOCX export (experimental)**: Pandoc emits DOCX directly from Markdown, then Python scripts normalize list indentation and global typography to keep spacing, margins, and heading styles more predictable:
+  - [converter/scripts/normalize_docx_lists.py](converter/scripts/normalize_docx_lists.py)
+  - [converter/scripts/normalize_docx_styles.py](converter/scripts/normalize_docx_styles.py)
+
+  DOCX is inherently less CSS-like than HTML/PDF; treat it as best-effort output that may vary slightly across Word versions.
 
 ## Requirements
 
-- Node.js 18+ (to run the npm scripts)
-- Python 3.10+ with `pip`
-- [Pandoc](https://pandoc.org/) available on your PATH
-- [WeasyPrint](https://weasyprint.org/) CLI for PDF export
+- Node.js 18+ (runs the repo scripts)
+- Python 3.10+ (PDF + DOCX normalizers)
+- Pandoc on your `PATH`
+
+For PDF export you also need WeasyPrint available to your Python environment.
+
+### macOS notes (WeasyPrint)
+
+WeasyPrint depends on system libraries (Cairo/Pango/etc). If `pip install weasyprint` fails or PDF export errors at runtime, installing dependencies via Homebrew typically resolves it:
+
+```bash
+brew install pandoc
+brew install weasyprint
+```
+
+If you prefer a Python-only install, you may still need Homebrew libs; consult the WeasyPrint docs for the latest native dependency list.
 
 ## Setup
 
 ```bash
-# install JS dependencies (none yet, but keeps npm scripts happy)
 npm install
 
-# create Python virtualenv for helper scripts
 python3 -m venv .venv
 source .venv/bin/activate
-pip install weasyprint python-docx lxml
+
+python -m pip install --upgrade pip
+python -m pip install weasyprint
 ```
 
-If Pandoc or WeasyPrint are installed via Homebrew, make sure their binaries are available globally (e.g., `brew install pandoc weasyprint`).
+The Node scripts will use `.venv/bin/python` automatically if it exists; otherwise they fall back to `python3`.
 
-## Usage
+## Quick start
 
-1. Create/update a Markdown resume inside `input/`.
-2. Run one of the npm scripts, passing the Markdown file path:
-   - `npm run build:html -- --input "input/resume.md"`
-   - `npm run export:docx -- --input "input/resume.md"`
-   - `npm run export:pdf -- --input "input/resume.md"`
+Convert a single input file:
 
-Outputs land in `output/`. By default the output filename is derived from the Markdown filename (spaces become underscores). You can override output paths with `--html`, `--pdf`, or `--docx`.
+```bash
+npm run export:pdf -- --input "input/General.md"
+npm run export:docx -- --input "input/General.md"
+npm run build:html  -- --input "input/General.md"
+```
 
-### Convert everything in `input/`
+Outputs are written to `output/` by default. Output basenames are derived from the input filename (spaces become underscores; special characters are stripped).
 
-- `npm run convert:all`
+## Commands
 
-Optional flags:
+All commands accept `--help` style flags via standard `--key value` / `--key=value` parsing.
 
-- `npm run convert:all -- --formats pdf,docx,html`
-- `npm run convert:all -- --continueOnError`
+### `npm run build:html`
 
-## Repo structure
+Build a standalone HTML file.
 
-- `input/` – source Markdown resumes.
-- `templates/` – starter Markdown templates (not auto-converted).
-- `converter/resume.css` – on-screen styling for the HTML export.
-- `converter/pdf-print.css` – print-specific overrides for WeasyPrint.
-- `converter/scripts/normalize_docx_lists.py` – fixes Word bullet indentation.
-- `output/` – generated artifacts; safe to delete/regenerate.
+Common flags:
 
-## Preventing “invisible” diff noise in `input/`
+- `--input` (required): path to a Markdown file
+- `--outputDir`: directory for generated files (default: `output/`)
+- `--html` / `--output`: explicit HTML output path (overrides `--outputDir`)
+- `--css`: CSS file path (default: `converter/resume.css`)
+- `--template`: Pandoc HTML template (default: `converter/pandoc-template.html`)
+- `--alignDatesFilter`: Lua filter path (default: `converter/filters/align_dates_right.lua`)
 
-Copy/paste from Word / Google Docs can introduce invisible or lookalike Unicode characters (notably the non-breaking hyphen `U+2011`) that render like a normal `-` but cause noisy diffs in version control.
+### `npm run export:pdf`
 
-This project includes a normalizer plus an optional pre-commit hook in the nested `input/` git repo:
+Generate PDF using WeasyPrint (HTML is generated as an intermediate artifact).
 
-- Manual normalization:
-  - `npm run normalize:md` (writes fixes into `input/`)
+Common flags:
+
+- `--input` (required)
+- `--outputDir` (default: `output/`)
+- `--pdf`: explicit PDF output path
+- `--html`: explicit intermediate HTML path
+- `--printCss`: print stylesheet (default: `converter/pdf-print.css`)
+
+### `npm run export:docx` (experimental)
+
+Generate a Word document.
+
+Starter-state note: DOCX formatting is “best effort”. For pixel-perfect output, prefer PDF.
+
+Common flags:
+
+- `--input` (required)
+- `--outputDir` (default: `output/`)
+- `--docx`: explicit DOCX output path
+
+### `npm run convert:all`
+
+Batch convert every `*.md` found under `input/`.
+
+```bash
+npm run convert:all
+npm run convert:all -- --formats pdf,docx,html
+npm run convert:all -- --formats docx,html
+npm run convert:all -- --continueOnError
+```
+
+Flags:
+
+- `--contentDir`: directory to scan (default: `input/`)
+- `--outputDir`: output directory (default: `output/`)
+- `--formats`: comma-separated list from `pdf,docx,html` (default: `pdf,docx,html`)
+- `--continueOnError`: keep going if a file fails
+
+Notes:
+
+- Underscore-prefixed directories (like `input/_archive/`) are treated as non-content and are skipped.
+- If `pdf` is in `--formats`, HTML is generated as part of the PDF pipeline.
+
+### `npm run draft:email` (experimental)
+
+Creates a local email draft file (`.eml`) using a cover letter as the HTML body and a resume PDF as an attachment.
+
+- The script inlines CSS into a `<style>` tag (more email-client friendly than stylesheet links).
+- Local images referenced in the cover letter HTML are converted into **CID inline attachments** and rewritten as `cid:...` image URLs.
+- It does **not** send email; it only writes an `.eml` you can import into Apple Mail / Outlook / Gmail (via “attach as file” workflows).
+
+Examples:
+
+```bash
+npm run draft:email -- \
+  --cover "input/Codespeed-Front-End-Developer-Cover.md" \
+  --resume "input/Codespeed-Front-End-Developer.md" \
+  --to "hiring@example.com" \
+  --subject "Front End Developer Application"
+```
+
+If you already have the PDF:
+
+```bash
+npm run draft:email -- \
+  --cover "input/Codespeed-Front-End-Developer-Cover.md" \
+  --resumePdf "output/Codespeed-Front-End-Developer.pdf"
+```
+
+Starter-state note: email HTML rendering varies a lot between clients. Expect to iterate on markup/CSS for your target client(s).
+
+## Repo layout
+
+- [input/](input/) — source Markdown resumes/cover letters (this folder is its own git repo).
+- [output/](output/) — generated artifacts (safe to delete/regenerate).
+- [examples/](examples/) — example Markdown inputs.
+- [converter/](converter/) — Pandoc template, CSS, Lua filters, and DOCX normalization scripts.
+- [scripts/](scripts/) — Node entrypoints for single-file and batch conversions.
+
+## Markdown authoring conventions
+
+This repo leans on a few Pandoc-friendly conventions to keep output consistent.
+
+### Headings + right-aligned date ranges
+
+The Lua filter [converter/filters/align_dates_right.lua](converter/filters/align_dates_right.lua) will right-align date ranges **only** when:
+
+- The heading is an `H2` or `H3` (`##` or `###`), and
+- The _very next paragraph_ is a date-only paragraph that contains exactly one emphasized or bold span (i.e. `_[ 2021 – 2024 ]_` or `**2021-2024**`), and
+- The text contains at least one digit and a dash (`-` or `–`).
+
+Example pattern:
+
+```md
+### Company — Role (Remote)
+
+_[ 2021 – 2024 ]_
+```
+
+Notes:
+
+- The date line must be its own paragraph and must not include extra text outside the emphasis/bold.
+- This is used heavily in `EXPERIENCE` sections to keep dates visually aligned.
+
+### Name styling (optional)
+
+If you want the first/last name colors from the CSS, write the H1 using inline HTML spans:
+
+```md
+# <span class="name-first">FIRST</span> <span class="name-last">LAST</span>
+```
+
+Pandoc will preserve these spans in HTML/PDF output.
+
+### Contact blocks and line breaks
+
+For tight contact blocks, use Markdown hard line breaks (two trailing spaces) rather than separate paragraphs:
+
+```md
+**Email:** you@example.com  
+**LinkedIn:** https://linkedin.com/in/you
+```
+
+### Spacing tweaks
+
+You’ll see occasional raw HTML like `<br><br><br>` in existing inputs to force page breaks/spacing in HTML/PDF. Pandoc passes this through; use sparingly.
+
+## Preventing “invisible” diff noise in input Markdown
+
+Copy/paste from Word/Google Docs can introduce invisible or lookalike Unicode characters (notably the non-breaking hyphen `U+2011`) that render like `-` but create noisy diffs.
+
+This repo includes a normalizer plus an optional pre-commit hook for the nested `input/` git repo:
+
+- Normalize manually:
+  - `npm run normalize:md` (rewrites files under `input/`)
   - `npm run normalize:md:check` (fails if fixes would be applied)
-- One-time hook setup (recommended if you commit inside `input/`):
+- Install the hook (recommended if you commit within `input/`):
   - `npm run setup:input-hooks`
 
-The hook auto-normalizes staged `*.md` files before commit and re-stages them.
+The hook normalizes staged `*.md` files and (if available) formats them with the parent repo’s Prettier config.
+
+## Formatting
+
+- Format all files supported by this repo’s Prettier setup: `npm run format`
+- Check formatting without writing: `npm run format:check`
+- Format only Markdown under `input/`: `npm run format:md`
+- Check Markdown formatting: `npm run format:md:check`
+
+## Troubleshooting
+
+- **`pandoc: command not found`**: install Pandoc and ensure it’s on your `PATH` (macOS: `brew install pandoc`).
+- **WeasyPrint import/runtime errors**: confirm your active Python is the one with WeasyPrint installed (the scripts prefer `.venv/`). On macOS, `brew install weasyprint` is the quickest way to get native dependencies.

@@ -1,6 +1,6 @@
 # Resume Generator
 
-Static tooling to turn a Markdown resume (and cover letter) into polished HTML, PDF, and DOCX deliverables.
+Static tooling to turn a Markdown resume (and cover letter) into polished HTML (including HTML email), PDF, and DOCX deliverables.
 
 At a glance:
 

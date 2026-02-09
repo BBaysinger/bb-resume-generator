@@ -2,6 +2,8 @@
 
 Static tooling to turn a Markdown resume (and cover letter) into polished HTML (including HTML email), PDF, and DOCX deliverables.
 
+Purpose: eliminate the tedium of working in MicroSoft/Adobe tooling (Word, Acrobat, etc.) for resumes and cover letters by keeping **Markdown as the single source of truth**. This approach improves ATS compatibility (clean, structured text), gives you more flexibility in authoring (versionable, diffable, reusable content), and aims to keep outputs consistent across formats so you don’t have to re-author, convert, or “fix formatting” every time you export.
+
 At a glance:
 
 - Markdown → HTML via Pandoc, using a repo template + CSS.
@@ -16,7 +18,7 @@ At a glance:
   - [converter/scripts/normalize_docx_lists.py](converter/scripts/normalize_docx_lists.py)
   - [converter/scripts/normalize_docx_styles.py](converter/scripts/normalize_docx_styles.py)
 
-  DOCX is inherently less CSS-like than HTML/PDF; treat it as best-effort output that may vary slightly across Word versions.
+  DOCX is inherently less CSS-like than HTML/PDF; the pipeline focuses on preserving content and structure and then normalizing common formatting pitfalls so the resulting document is stable and predictable across Word versions.
 
 ## Requirements
 
@@ -96,7 +98,7 @@ Common flags:
 
 Generate a Word document.
 
-Starter-state note: DOCX formatting is “best effort”. For pixel-perfect output, prefer PDF.
+Note: DOCX layout can still vary somewhat across Word versions and settings; for a locked visual result, prefer PDF.
 
 Common flags:
 

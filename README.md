@@ -65,6 +65,12 @@ bash scripts/input/_scripts/setup-hooks.sh
 
 ## Quick start
 
+Convert everything under `input/` (most common):
+
+```bash
+npm run convert:all
+```
+
 Convert a single input file:
 
 ```bash

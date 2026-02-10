@@ -198,6 +198,24 @@ Starter-state note: email HTML rendering varies a lot between clients. Expect to
 - [converter/](converter/) — Pandoc template, CSS, Lua filters, and DOCX normalization scripts.
 - [scripts/](scripts/) — Node entrypoints for single-file and batch conversions.
 
+## Private `input/` repo (how it works)
+
+This repo intentionally treats `input/` as a **separate git repo** so you can version your real resumes/cover letters locally (or in a private remote) without ever committing them to this tooling repo or pushing them to GitHub.
+
+- The parent repo ignores `input/` via `.gitignore`, so your private files won’t show up in the parent repo’s `git status`.
+- If you want version history, commit inside `input/`:
+
+```bash
+cd input
+git status
+git add .
+git commit -m "Update resume"
+```
+
+If you don’t want anything uploaded anywhere, simply don’t add a remote in `input/` (or only add a private one).
+
+Tip: install hooks via `npm run setup:input-hooks` (or `bash scripts/input/_scripts/setup-hooks.sh`) so commits in `input/` get the Markdown normalizer automatically.
+
 ## Markdown authoring conventions
 
 This repo leans on a few Pandoc-friendly conventions to keep output consistent.

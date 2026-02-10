@@ -55,6 +55,14 @@ python -m pip install weasyprint
 
 The Node scripts will use `.venv/bin/python` automatically if it exists; otherwise they fall back to `python3`.
 
+### Git hooks (recommended)
+
+To avoid accidentally committing private resume content under `input/` to this repo, install the repo hooks:
+
+```bash
+bash scripts/input/_scripts/setup-hooks.sh
+```
+
 ## Quick start
 
 Convert a single input file:
@@ -112,6 +120,9 @@ Common flags:
 
 Batch convert every `*.md` found under `input/`.
 
+Note: `input/Resume-TEMPLATE.stub.md` is treated as a non-convertible template and is skipped by `convert:all`.
+If you want to render it anyway, use a single-file command (e.g. `npm run build:html -- --input "input/Resume-TEMPLATE.stub.md"`).
+
 ```bash
 npm run convert:all
 npm run convert:all -- --formats pdf,docx,html
@@ -157,13 +168,27 @@ npm run draft:email -- \
   --resumePdf "output/Codespeed-Front-End-Developer.pdf"
 ```
 
+Using the tracked lorem example inputs:
+
+```bash
+npm run draft:email -- \
+  --cover "input/CoverLetter-EXAMPLE.lorem.md" \
+  --resume "input/Resume-EXAMPLE.lorem.md" \
+  --to "hiring@example.com" \
+  --subject "Front-End Engineer Application"
+```
+
 Starter-state note: email HTML rendering varies a lot between clients. Expect to iterate on markup/CSS for your target client(s).
 
 ## Repo layout
 
-- [input/](input/) — source Markdown resumes/cover letters (this folder is its own git repo).
+- [input/](input/) — source Markdown resumes/cover letters (this folder is its own git repo; ignored by this repo’s `.gitignore`).
 - [output/](output/) — generated artifacts (safe to delete/regenerate).
-- [examples/](examples/) — example Markdown inputs.
+- [examples/](examples/) — tracked templates/examples you can copy into `input/`:
+  - [examples/Resume-TEMPLATE.stub.md](examples/Resume-TEMPLATE.stub.md)
+  - [examples/Resume-EXAMPLE.lorem.md](examples/Resume-EXAMPLE.lorem.md)
+  - [examples/CoverLetter-TEMPLATE.stub.md](examples/CoverLetter-TEMPLATE.stub.md)
+  - [examples/CoverLetter-EXAMPLE.lorem.md](examples/CoverLetter-EXAMPLE.lorem.md)
 - [converter/](converter/) — Pandoc template, CSS, Lua filters, and DOCX normalization scripts.
 - [scripts/](scripts/) — Node entrypoints for single-file and batch conversions.
 

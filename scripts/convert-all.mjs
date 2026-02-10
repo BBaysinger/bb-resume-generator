@@ -133,7 +133,14 @@ if (!fs.existsSync(contentDir)) {
 
 ensureDir(outputDir);
 
-const mdFiles = listMarkdownFiles(contentDir).sort();
+const SKIP_BASENAMES = new Set([
+  "Resume-TEMPLATE.stub.md",
+  "CoverLetter-TEMPLATE.stub.md",
+]);
+
+const mdFiles = listMarkdownFiles(contentDir)
+  .filter((filePath) => !SKIP_BASENAMES.has(path.basename(filePath)))
+  .sort();
 if (mdFiles.length === 0) {
   fail(`No .md files found under: ${contentDir}`);
 }

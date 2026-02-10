@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Prevent accidentally committing private resume content from input/ to the parent repo.
+# The parent repo intentionally tracks only the template/example files below.
+
+allowed_paths=(
+  "input/Resume-TEMPLATE.stub.md"
+  "input/Resume-EXAMPLE.lorem.md"
+  "input/CoverLetter-TEMPLATE.stub.md"
+  "input/CoverLetter-EXAMPLE.lorem.md"
+)
+
+is_allowed() {
+  local path="$1"
+  for allowed in "${allowed_paths[@]}"; do
+    if [[ "$path" == "$allowed" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+blocked=()
+# Staged files being committed (A,C,M,R)
+# Use NUL delimiters so paths with spaces are handled safely.
+while IFS= read -r -d '' path; do
+  if [[ "$path" == input/* ]]; then
+    if ! is_allowed "$path"; then
+      blocked+=("$path")
+    fi
+  fi
+done < <(git diff --cached --name-only --diff-filter=ACMR -z)
+
+if (( ${#blocked[@]} > 0 )); then
+  echo "ERROR: Refusing to commit files under input/ in the parent repo:" >&2
+  for b in "${blocked[@]}"; do
+    echo "  - $b" >&2
+  done
+  echo "" >&2
+  echo "Only these files are allowed in the parent repo:" >&2
+  for a in "${allowed_paths[@]}"; do
+    echo "  - $a" >&2
+  done
+  echo "" >&2
+  echo "If you really intended this, move the content out of input/ or commit it in the separate input/ repo instead." >&2
+  exit 1
+fi
+
+exit 0

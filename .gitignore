@@ -1,3 +1,5 @@
 source/
 output/
+
+# `input/` is a separate nested git repo for your private resumes.
 input/

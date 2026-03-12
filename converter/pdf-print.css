@@ -88,6 +88,11 @@ ul li::before {
   font-size: 9pt;
 }
 
+.bullet {
+  color: #87ad26;
+  font-size: 9pt;
+}
+
 ol {
   margin: 2pt 0;
   padding-left: 1.25em;
